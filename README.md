@@ -46,3 +46,30 @@ pnpm build
 ```sh
 pnpm lint
 ```
+
+**Docker / Running (local development)**
+
+- **Build & Run (detached):** `make up` — builds images and starts services:
+  - `frontend` (Vite dev server at port `5173`)
+  - `backend` (Spring Boot at port `8080`)
+  - `db` (Postgres at port `5432`)
+- **Build only:** `make build` — rebuild images with no cache.
+- **Stop & remove:** `make down` — stops the compose application and removes containers.
+- **Follow logs:** `make logs` — tails compose logs for all services.
+
+Run backend tests in a disposable Maven container (no build artifacts left on host):
+
+```sh
+make test-backend
+```
+
+Run frontend tests (if configured in `package.json`):
+
+```sh
+make test-frontend
+```
+
+Notes:
+- Frontend runs `npm run dev` inside a Node container and exposes port `5173`.
+- Backend is built from `chat/` using the multi-stage `chat/Dockerfile` and connects to Postgres at `jdbc:postgresql://db:5432/chatdb` (credentials `postgres`/`postgres`).
+- For local runs without Docker you can still execute the Maven wrapper: `./chat/mvnw test`.
