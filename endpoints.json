@@ -1,0 +1,9 @@
+{
+  "ws": "ws://localhost:8080/ws/chat",
+  "http": {
+    "getMessages": "http://localhost:8080/api/messages",
+    "postMessage": "http://localhost:8080/api/messages",
+    "getUsers": "http://localhost:8080/api/users",
+    "health": "http://localhost:8080/actuator/health"
+  }
+}
